@@ -7,7 +7,7 @@ RUN npm run build
 
 FROM node:20.19.4-alpine AS runner
 WORKDIR /app
-RUN npm install -g serve
 COPY --from=build /app/dist ./dist
+COPY server.js ./server.js
 EXPOSE 3000
-CMD ["sh", "-c", "serve -s dist -l 3000"]
+CMD ["node", "server.js"]
